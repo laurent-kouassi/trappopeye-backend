@@ -16,7 +16,7 @@ TRAPPOPEYE-BACKEND
 
 ## Installation
 
-- `git clone git@github.com:laurentkouassi/trappopeye-backend.git`
+- `git clone https://github.com/laurent-kouassi/trappopeye-backend.git`
 - `cd trappopeye-backend`
 - `npm install`
 - `npm start`
