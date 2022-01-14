@@ -1,5 +1,6 @@
 import WebSocket from 'ws';
 import queryString from "query-string";
+import routes from '../routes';
 
 
 export default (expressServer) => {
@@ -24,6 +25,8 @@ export default (expressServer) => {
         const connection_params = queryString.parse(param);
 
         console.log(connection_params);
+        
+        expressServer.use(`/${connection_params}`, routes)
 
         connection.on("message", message => {
             const parsedMessage = JSON.parse(message);

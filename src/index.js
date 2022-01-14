@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 });
 
 // * Routes * //
-
 app.use('/', routes);
 
 // * Start * //
@@ -56,16 +55,24 @@ connectDb().then(async () => {
 
 const seedGeocode = async () => {
   const geo_lunch = JSON.stringify(JSON.parse('../src/data/lunch.geojson'));
+  const geo_office = JSON.stringify(JSON.parse('../src/data/popeye-village-balluta.geojson'));
+
   const lunchRoute = geo_lunch.features[0].geometry;
+  const officeRoute = geo_office.features[0].geometry;
+  // for (let index = 0; index < lunchRoute.length; index++) {
+    // const insertGeo = geo[index];
 
-  for (let index = 0; index < lunchRoute.length; index++) {
-    const insertGeo = geo[index];
-
-    const geocode = new models.Geocode({
+    const geocode_lunch = new models.Geocode({
       routeId: 'lunch-route',
-      coordinates: insertGeo.coordinates
+      coordinates: lunchRoute.coordinates
     });
 
-    await geocode.save();
- }
+    const geocode_office = new models.Geocode({
+      routeId: 'lunch-route',
+      coordinates: officeRoute.coordinates
+    });
+
+    await geocode_lunch.save();
+    await geocode_office.save();
+//  }
 };
