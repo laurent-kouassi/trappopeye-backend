@@ -1,22 +1,31 @@
 import { Router } from 'express';
+import Geocode from '../models/geocode';
 
 const router = Router();
 
 
-router.get('/:routeId', (req, res) => {
-  return res.send(req.context.models.geocode[req.params.routeId]);
+// router.get('/:routeId', (req, res) => {
+//   Geocode.find({routeId: req.params.routeId == 'home' ? 'office' : req.params.routeId}, (error, result) => {
+//     res.send(result);
+//   })
+// });
+
+router.get('/office', (req, res) => {
+  Geocode.find({routeId: 'office'}, (error, result) => {
+    res.send(result);
+  })
 });
 
-router.post('/', (req, res) => {
-  console.log(req);
-  const geocode = {
-    geocode: req.body.cordinates,
-    route: req.body.route
-  };
+router.get('/lunch', (req, res) => {
+  Geocode.find({routeId: 'lunch'}, (error, result) => {
+    res.send(result);
+  })
+});
 
-  req.context.models.geocode[req.body.route] = geocode;
-
-  return res.send(geocode);
+router.get('/home', (req, res) => {
+  Geocode.find({routeId:'home'}, (error, result) => {
+    res.send(result);
+  })
 });
 
 export default router;

@@ -63,16 +63,22 @@ const seedGeocode = async () => {
     // const insertGeo = geo[index];
 
     const geocode_lunch = new models.Geocode({
-      routeId: 'lunch-route',
+      routeId: 'lunch',
       coordinates: lunchRoute.coordinates
     });
 
     const geocode_office = new models.Geocode({
-      routeId: 'lunch-route',
+      routeId: 'office',
       coordinates: officeRoute.coordinates
+    });
+
+    const geocode_home = new models.Geocode({
+      routeId: 'home',
+      coordinates: officeRoute.coordinates.reverse()  // we only need to reverse the office route
     });
 
     await geocode_lunch.save();
     await geocode_office.save();
+    await geocode_home.save();
 //  }
 };
